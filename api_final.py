@@ -45,7 +45,7 @@ def home():
     return "<h1>Payment API</h1><p>This site is a prototype API.</p>"
 
 # return all loans
-@app.route('/api/v1/resources/loans/all', methods=['GET'])
+@app.route('/api/v1/resources/loans/all', methods=['GET','POST'])
 def api_all():
     conn = sqlite3.connect('omf.db')
     conn.row_factory = dict_factory
@@ -55,7 +55,7 @@ def api_all():
     return jsonify(all_loans)
 
 # return all payments by loan id
-@app.route('/api/v1/resources/loans/showpayments', methods=['GET'])
+@app.route('/api/v1/resources/loans/showpayments', methods=['GET','POST'])
 def api_showpayments():
     query_parameters = request.args
     id = query_parameters.get('id')
@@ -76,7 +76,7 @@ def page_not_found(e):
     return "<h1>404</h1><p>The resource could not be found.</p>", 404
 
 # return filtered results
-@app.route('/api/v1/resources/loans', methods=['GET'])
+@app.route('/api/v1/resources/loans', methods=['GET','POST'])
 def api_filter():
 
     # collect args
